@@ -1,0 +1,110 @@
+---
+title: "BST_682_HMWK_1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+###Question 1
+```{r Question 1}
+uber <- 3000
+airbnb <- 1500
+stata <- 800
+women <- (uber * .30) + (airbnb*.45) + (stata * .65)
+(uber *30) / women
+```
+
+
+###Question 2
+```{r Question 2}
+tails.distr.df <- data_frame(value = c(0,1,2,3,4), prob= c(1/16, 1/4, 3/4, 1/4, 1/16))
+tails.distr.df
+```
+
+```{r Question 2 graph, echo= FALSE}
+
+tails.distr.df %>% ggplot(aes(x=value, y=prob)) + geom_bar(stat = "identity") + ylim(c(0,1)) + xlab("X - Number of Tails") + ylab("f(X) Probability")
+
+```
+
+###Question 3
+```{r Question 3 Data, echo=FALSE}
+F <- c(18,31,34,33,27,33,28,23,33,12,19,25,14,4,22,7)
+M <- c(11,22,27,29,24,29,25,26,38,14,23,31,20,6,34,12)
+Y <- F
+N <- F + M
+```
+
+
+```{r Question 3a, echo=False}
+Y / N
+```
+
+```{r Question 3b, echo=False}
+logL <- function(p) sum(log(dbinom(Y, N, p)))
+optimize(logL, lower=0, upper=1, maximum=TRUE)
+
+```
+
+
+###Question 4
+```{r Question 4}
+```
+
+
+###Question 5
+```{r Question 5}
+Table_2_3_Birthweight_and_gestational_age$xy <- (Table_2_3_Birthweight_and_gestational_age[,2] * Table_2_3_Birthweight_and_gestational_age[,1])
+
+Table_2_3_Birthweight_and_gestational_age$x_squared <- (Table_2_3_Birthweight_and_gestational_age[,1]^2)  
+
+Table_2_3_Birthweight_and_gestational_age$y_squared <- (Table_2_3_Birthweight_and_gestational_age[,2]^2) 
+
+sum_gage <- colSums(Table_2_3_Birthweight_and_gestational_age[,1])
+
+sum_bwt <- colSums(Table_2_3_Birthweight_and_gestational_age[,2])
+
+sum_xy <- colSums(Table_2_3_Birthweight_and_gestational_age[,4])
+
+sum_x2 <- colSums(Table_2_3_Birthweight_and_gestational_age[,5])
+
+sum_y2 <- colSums(Table_2_3_Birthweight_and_gestational_age[,6])
+
+intercept_gage_bwt <- (((sum_bwt*sum_x2) - (sum_gage * sum_xy))) / ((((24 * sum_x2) - (sum_gage^2))))
+intercept_gage_bwt
+
+slope_gage_bwt <- ((24*sum_xy) - (sum_gage*sum_bwt)) / (((24*sum_x2) - (sum_gage^2)))
+slope_gage_bwt
+```
+
+
+###Question 6
+
+I use a book called Discovering Statistics using R. Online I use https://math.stackexchange.com
+for the statistics questions, and https://stackoverflow.com for R programming questions. Mostly I use them because they are fairly easy to search through and ask a variety of questions with exhaustive responses.
+
+
+###Question 7
+```{r Question 7}
+q7p1 <- ggplot(Table_2_3_Birthweight_and_gestational_age, aes(gestational_age, birth_weight, colour = sex))
+q7p1 + geom_point()
+xyplot(birth_weight ~ gestational_age|sex, data = Table_2_3_Birthweight_and_gestational_age)
+
+
+```
+Q7. Females have more weight diversity, makes have a sharper increase in weight by age than females.
+
+###Question 8
+```{r Question 8}
+q8lm <- lm(formula = birth_weight ~ gestational_age, data= Table_2_3_Birthweight_and_gestational_age)
+summary(q8lm)
+```
