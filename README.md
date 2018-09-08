@@ -45,7 +45,7 @@ women <- (uber * .30) + (airbnb*.45) + (stata * .65)
 ## taking on a particular value (in this cases tails, out of heads/tails). When you take all possible values (sample space)
 ##and associated probabilities into consideration, this is a discrete probability distribution as defined by a pmf.
 
-tails.distr.df <- data_frame(value = c(0,1,2,3,4), prob= c(1/16, 1/4, 3/4, 1/4, 1/16))
+tails.distr.df <- data_frame(value = c(0,1,2,3,4), prob= c(.0625, .25, .375, .25, .0625))
 
 ##The values are the possible coin clip outcomes, 0 tails, 1, 2, 3, and 4 tails.)
 ##The prob are the probability of getting (or not getting a tails)
