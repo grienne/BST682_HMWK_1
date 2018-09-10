@@ -1,12 +1,26 @@
 ---
-title: "BST_682_HMWK_1"
+title: "Homework 1 - BST682"
 output:
-  pdf_document: default
-  html_document: default
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    highlight: tango
+    theme: paper
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '3'
+date: 'Assigned: August 31, 2018'
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r magrittr, magrittr}
+
+library(magrittr)
+library(ggplot2)
+library(dplyr)
+
 ```
 
 ###Question 1
@@ -21,12 +35,11 @@ women <- (uber * .30) + (airbnb*.45) + (stata * .65)
 
 ###Question 2
 ```{r Question 2}
-tails.distr.df <- data_frame(value = c(0,1,2,3,4), prob= c(.0625, .25, .375, .25, .0625))
+tails.distr.df <- data.frame(value = c(0,1,2,3,4), prob= c(.0625, .25, .375, .25, .0625))
 tails.distr.df
 ```
 
 ```{r Question 2 graph, echo= FALSE}
-
 tails.distr.df %>% ggplot(aes(x=value, y=prob)) + geom_bar(stat = "identity") + ylim(c(0,1)) + xlab("X - Number of Tails") + ylab("f(X) Probability")
 
 ```
@@ -96,7 +109,7 @@ q7p1 <- ggplot(Table_2_3_Birthweight_and_gestational_age, aes(gestational_age, b
 q7p1 + geom_point()
 xyplot(birth_weight ~ gestational_age|sex, data = Table_2_3_Birthweight_and_gestational_age)
 ```
-Q7. Females have more weight diversity, makes have a sharper increase in weight by age than females.
+Q7. The weight seems highly dependent on age and not sex. 
 
 ###Question 8
 ```{r Question 8}
